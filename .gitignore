@@ -1,10 +1,12 @@
 # Dependencies
 node_modules/
+*/node_modules/
 .pnp
 .pnp.js
 
 # Build outputs
 .next/
+*/.next/
 out/
 dist/
 build/
@@ -29,6 +31,22 @@ lerna-debug.log*
 coverage/
 .nyc_output/
 *.lcov
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
 # Cache
 .cache/
