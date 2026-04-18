@@ -91,9 +91,14 @@ export async function parseRSSFeed(feedUrl: string): Promise<ParseResult> {
 }
 
 // Calculate content hash for deduplication
+// Uses a combination of normalized title and URL to create a unique identifier
 export function calculateContentHash(article: ParsedArticle): string {
-  const normalized = `${article.title.toLowerCase().trim()}|${article.url}`
-  return Buffer.from(normalized).toString('base64').slice(0, 16)
+  // Normalize title: lowercase, trim, remove extra spaces
+  const normalizedTitle = article.title.toLowerCase().trim().replace(/\s+/g, ' ')
+  // Create unique identifier from title + URL
+  const normalized = `${normalizedTitle}|${article.url}`
+  // Use simple hash: first 32 chars of base64 to avoid collisions
+  return Buffer.from(normalized).toString('base64').slice(0, 32)
 }
 
 // Estimate read time based on content length
